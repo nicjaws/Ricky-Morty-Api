@@ -1,10 +1,21 @@
-import React from 'react'
+import React from 'react';
 
-const Cards = () => {
+const Cards = ({results}) => {
+    const display;
+    console.log(results)
+
+    if (results) {
+       display = results.map((item) => {
+           const {id} = item
+            return(<div key={id} className="col-4">asldkjfslkdjl</div>)
+       });
+    } else {
+       display =  "No characters found";
+    }
+    
     return (
-        
-            <div className="col-4">Cards</div>
+            <>{display}</>
     )
-}
+};
 
-export default Cards
+export default Cards;

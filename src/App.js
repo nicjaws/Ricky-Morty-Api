@@ -7,12 +7,16 @@ import Filters from './components/Filters/Filters';
 function App() {
 
   const [pageNumer, setPageNumber] = useState(1);
-  let api = `https://rickandmortyapi.com/api/character/?page=${pageNumer}`;
+  const [fetchData, updateFetchData] = useState([]);
+  const {info, results } = fetchData;
+
+
+  const api = `https://rickandmortyapi.com/api/character/?page=${pageNumer}`;
 
   useEffect(() => {
     (async function(){
       let data = await fetch(api).then((res) => res.json());
-      console.log(data.results);
+      updateFetchData(data);
     })()
   }, [api])
 
@@ -26,9 +30,9 @@ function App() {
           </div>
           <div className="col-8">
             <div className="row">
-              <Cards />
-              <Cards />
-              <Cards />
+              <Cards results={results}/>
+              <Cards results={results}/>
+              <Cards results={results}/>
             </div>
           </div>
         </div>
