@@ -3,15 +3,19 @@ import React, { useState, useEffect } from 'react'
 import './App.css';
 import Cards from './components/Cards/Cards';
 import Filters from './components/Filters/Filters';
+import Pagination from './components/Pagination/Pagination';
+import Search from './components/Search/Search';
 
 function App() {
 
-  const [pageNumer, setPageNumber] = useState(1);
+  const [pageNumber, setPageNumber] = useState(1);
+
+  console.log(pageNumber)
   const [fetchData, updateFetchData] = useState([]);
   const {info, results } = fetchData;
 
 
-  const api = `https://rickandmortyapi.com/api/character/?page=${pageNumer}`;
+  const api = `https://rickandmortyapi.com/api/character/?page=${pageNumber}`;
 
   useEffect(() => {
     (async function(){
@@ -23,6 +27,9 @@ function App() {
   return (
     <div className="App">
       <h1 className="text-center poppins my-4">Rick & Morty <span className="text-primary">Wiki</span></h1>
+
+      <Search />
+
       <div className="container">
         <div className="row">
           <div className="col-3">
@@ -37,6 +44,8 @@ function App() {
           </div>
         </div>
       </div>
+
+      <Pagination pageNumber={pageNumber} setPageNumber={setPageNumber}/>
     </div>
   );
 }
